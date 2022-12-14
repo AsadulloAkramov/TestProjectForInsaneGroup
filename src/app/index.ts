@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { ApplicationConfig } from '../config';
 import { ApplicationConfigurationOptions } from '../domain/ApplicationConfigs';
+import routes from '../core/http/baseRoute';
 
 export class App {
   private static instance: App;
@@ -37,6 +38,7 @@ export class App {
       this.express = Express();
       this.express.use(bodyParser.json({ limit: '50mb' }));
       this.express.use(cors(corsOptions));
+      this.express.use(routes);
       this.server = this.express.listen(port, () => {
         console.log(`[App]: Listening on port ${port}`);
       });
