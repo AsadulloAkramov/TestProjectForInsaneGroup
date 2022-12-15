@@ -3,6 +3,7 @@ import Joi from 'joi';
 interface PostValidationSchema {
   create: Joi.Schema;
   getPostById: Joi.Schema;
+  list: Joi.Schema;
 }
 
 const postValidationSchema: PostValidationSchema = {
@@ -15,6 +16,12 @@ const postValidationSchema: PostValidationSchema = {
   getPostById: Joi.object().keys({
     params: Joi.object().keys({
       id: Joi.number().required()
+    })
+  }),
+  list: Joi.object().keys({
+    query: Joi.object().keys({
+      offset: Joi.number(),
+      limit: Joi.number()
     })
   })
 };

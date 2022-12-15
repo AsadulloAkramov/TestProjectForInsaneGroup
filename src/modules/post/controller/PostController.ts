@@ -5,8 +5,9 @@ import { PostRepository } from '../repository/PostRepository';
 import { AuthRepository } from '../../auth/repository/authRepository';
 import { UserRepository } from '../../user/repository/UserRepository';
 import { Post } from '../../../domain/Entities/post';
-import PostValidationSchema from '../http/validation/post';
 import { Validate } from '../../../core/http/middlewares/ValidatorRequest';
+import PostValidationSchema from '../http/validation/post';
+import {PaginateOptions, PaginationListDTO} from "../../../domain/Entities/infra";
 export class PostController extends BaseController {
   private postRepository = new PostRepository();
   private authRepository = new AuthRepository();
@@ -31,9 +32,18 @@ export class PostController extends BaseController {
     }
   }
 
+  @Validate(PostValidationSchema.list)
   async getAllPosts(req: Request, res: Response) {
     try {
-    } catch (err) {}
+      const options: PaginateOptions = {
+        offset: +req.query.offset,
+        limit: +req.query.limit
+      }
+      const paginatedPosts = await this.postRepository.getAllPostsWithPagination(options);
+      this.ok(res, paginatedPosts);
+    } catch (err) {
+      this.fail(res, err.message);
+    }
   }
 
   @Validate(PostValidationSchema.getPostById)
