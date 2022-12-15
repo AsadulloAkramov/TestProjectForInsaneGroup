@@ -4,7 +4,7 @@ import { CreateUserDTO } from '../dtos/UserDTO';
 import { UserRepository } from '../repository/UserRepository';
 import { Validate } from '../../../core/http/middlewares/ValidatorRequest';
 import UserValidationSchema from '../http/validation/user';
-import {PaginateOptions} from "../../../domain/Entities/infra";
+import { PaginateOptions } from '../../../domain/Entities/infra';
 
 export class UserController extends BaseController {
   private userRepository = new UserRepository();

@@ -3,9 +3,8 @@ import { User } from '../../../domain/Entities/user';
 import { PasswordService } from '../../auth/service/PasswordService';
 import { UserService } from '../service/UserService';
 import { BaseRepository } from '../../../core/baseRepository';
-import {PaginateOptions} from "../../../domain/Entities/infra";
+import { PaginateOptions } from '../../../domain/Entities/infra';
 import { APPLICATION_MODELS } from '../../../core/models';
-
 
 export class UserRepository extends BaseRepository {
   private userService = new UserService();
