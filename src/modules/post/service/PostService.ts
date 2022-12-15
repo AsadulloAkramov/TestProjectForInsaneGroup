@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { ICreatePostTask, Post } from '../../../domain/Entities/post';
 import { UserService } from '../../user/service/UserService';
+import * as console from 'console';
 
 export class PostService {
   private postJsonDatabasePath: string = process.cwd() + '/src/JSONDatabase/posts.json';
@@ -13,6 +14,17 @@ export class PostService {
       };
       return this.saveNewPostToJSONDatabase(newPost);
     } catch (err) {}
+  }
+
+  getPostById(postId: number): Post {
+    try {
+      const allPostAsJSON = this.readAllPostsFromPostsJson();
+      const posts: Post[] = JSON.parse(allPostAsJSON.toString());
+      return posts.find((post) => post.id == postId);
+    } catch (err) {
+      console.log(`Post Service ---> Get Post by id error: ${err.message}`);
+      throw err;
+    }
   }
 
   saveNewPostToJSONDatabase(post: Post): Post {
