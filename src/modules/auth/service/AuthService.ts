@@ -12,6 +12,17 @@ export class AuthService {
     });
   }
 
+  async decodeJWT(token: string): Promise<JWTClaims> {
+    try {
+      const jwtSecret: string = process.env.JWT_SECRET;
+      const decodedToken = await jwt.verify(token, jwtSecret);
+      return decodedToken as JWTClaims;
+    } catch (err) {
+      console.error(`Auth Service ---> Decoding JWT Token error: ${err.message}`);
+      throw err;
+    }
+  }
+
   async createRefreshToken(): Promise<RefreshToken> {
     try {
       return randomToken.uid(256) as RefreshToken;

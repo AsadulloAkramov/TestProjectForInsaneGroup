@@ -1,5 +1,6 @@
 import { User } from '../../../domain/Entities/user';
 import fs from 'fs';
+import { PaginateOptions } from '../../../domain/Entities/infra';
 
 export class UserService {
   private userJsonDatabasePath: string = process.cwd() + '/src/JSONDatabase/users.json';
@@ -35,6 +36,31 @@ export class UserService {
     }
   }
 
+  async findUserById(userId: number): Promise<User | null> {
+    const allUserAsJSON = this.readAllUserFromUsersJSON();
+    // convert json data into array of users
+    const users: User[] = await JSON.parse(allUserAsJSON.toString());
+    return users.find((user) => user.id == userId);
+  }
+
+  async getAllUsers(options: PaginateOptions) {
+    const usersAsJSON = this.readAllUserFromUsersJSON();
+    let users: User[] = [];
+    const userData: User[] = JSON.parse(usersAsJSON.toString());
+    const totalAmount: number = userData.length;
+    if (options.limit) {
+      for (let i = options.offset; i < options.offset + options.limit; i++) {
+        users.push(userData[i]);
+      }
+    } else {
+      users = userData;
+    }
+
+    return {
+      users,
+      totalAmount
+    };
+  }
   readAllUserFromUsersJSON() {
     return fs.readFileSync(this.userJsonDatabasePath);
   }
