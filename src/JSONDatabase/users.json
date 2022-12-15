@@ -1,1 +1,4 @@
-[{"id":1,"email":"Asadullo@gmail.com","hashedPassword":"bbe2d6bc24d28abc97e7917df5476edc","salt":"038783d68d2ba60c2642"}]
+[
+  {"id":1,"email":"Asadullo@gmail.com","hashedPassword":"3d33658dba5a16a6318bfdd2876a955e","salt":"931b30120bfbe5123290","posts":[{"id":1},{"id":2}]},
+  {"id":2,"email":"Nurullo@gmail.com","hashedPassword":"fba67bcc95ae1cbe8e0ec30c39d679bb","salt":"14ee9fdb24938b084ade","posts":[{"id":3},{"id":4}]}
+]

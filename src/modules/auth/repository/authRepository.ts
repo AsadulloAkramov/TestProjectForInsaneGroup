@@ -35,4 +35,12 @@ export class AuthRepository {
       };
     } catch (err) {}
   }
+
+  async decodedUser(token: string): Promise<JWTClaims> {
+    try {
+      return await this.authService.decodeJWT(token);
+    } catch (err) {
+      throw err;
+    }
+  }
 }

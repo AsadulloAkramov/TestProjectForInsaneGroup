@@ -23,7 +23,8 @@ export class UserRepository extends BaseRepository {
         id: 1,
         email: body.email,
         hashedPassword: hashedPassword,
-        salt: salt
+        salt: salt,
+        posts: []
       };
       await this.userService.saveUserToJSONDatabase(user);
       return user;

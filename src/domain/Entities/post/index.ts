@@ -8,3 +8,10 @@ export interface Post {
   content: string;
   author: UserId;
 }
+
+export interface ICreatePostTask {
+  title: string;
+  content: string;
+
+  author: UserId;
+}

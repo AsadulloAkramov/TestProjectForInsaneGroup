@@ -1,6 +1,7 @@
 import { User } from '../../../domain/Entities/user';
-import fs from 'fs';
+import * as fs from 'fs';
 import { PaginateOptions } from '../../../domain/Entities/infra';
+import * as console from 'console';
 
 export class UserService {
   private userJsonDatabasePath: string = process.cwd() + '/src/JSONDatabase/users.json';
@@ -43,6 +44,19 @@ export class UserService {
     return users.find((user) => user.id == userId);
   }
 
+  saveUserPostsListByPostId(postId: number, authorId: number) {
+    try {
+      const allUserAsJSON = this.readAllUserFromUsersJSON();
+      const users: User[] = JSON.parse(allUserAsJSON.toString());
+      const postAuthor: User = users.find((user) => user.id == authorId);
+      postAuthor.posts.push({ id: postId });
+      users[postAuthor.id - 1] = postAuthor;
+      fs.writeFileSync(this.userJsonDatabasePath, JSON.stringify(users));
+    } catch (err) {
+      console.log(`User Service ---> Save user post id error : ${err.message}`);
+      throw err;
+    }
+  }
   async getAllUsers(options: PaginateOptions) {
     const usersAsJSON = this.readAllUserFromUsersJSON();
     let users: User[] = [];
