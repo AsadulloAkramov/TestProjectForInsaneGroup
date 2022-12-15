@@ -11,7 +11,7 @@
   "author": "Asadullo Akramov",
   "license": "ISC",
   "scripts": {
-    "build": "rm -rf dist/ && tsc",
+    "build": "tsc",
     "start:dev": "nodemon",
     "start": "node ./dist/src/index.js",
     "test": "jest",
