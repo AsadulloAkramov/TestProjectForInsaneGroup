@@ -1,10 +1,10 @@
-import {BaseRepository} from '../../../core/baseRepository';
-import {CreatePostDTO, GetPostByIdDTO} from '../dtos/PostDTO';
-import {ICreatePostTask, Post} from '../../../domain/Entities/post';
-import {CreatePostTaskRequest} from '../../../domain/Entities/post/CreatePostTaskRequest';
-import {PostService} from '../service/PostService';
-import {PaginateOptions} from "../../../domain/Entities/infra";
-import {APPLICATION_MODELS} from "../../../core/models";
+import { BaseRepository } from '../../../core/baseRepository';
+import { CreatePostDTO, GetPostByIdDTO } from '../dtos/PostDTO';
+import { ICreatePostTask, Post } from '../../../domain/Entities/post';
+import { CreatePostTaskRequest } from '../../../domain/Entities/post/CreatePostTaskRequest';
+import { PostService } from '../service/PostService';
+import { PaginateOptions } from '../../../domain/Entities/infra';
+import { APPLICATION_MODELS } from '../../../core/models';
 
 export class PostRepository extends BaseRepository {
   private postService = new PostService();
@@ -19,9 +19,8 @@ export class PostRepository extends BaseRepository {
 
   async getAllPostsWithPagination(options: PaginateOptions) {
     try {
-        return await this.paginate(APPLICATION_MODELS.POST, options);
-    }
-    catch (err) {
+      return await this.paginate(APPLICATION_MODELS.POST, options);
+    } catch (err) {
       throw err;
     }
   }

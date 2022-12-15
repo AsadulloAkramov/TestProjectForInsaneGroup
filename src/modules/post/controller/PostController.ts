@@ -7,7 +7,7 @@ import { UserRepository } from '../../user/repository/UserRepository';
 import { Post } from '../../../domain/Entities/post';
 import { Validate } from '../../../core/http/middlewares/ValidatorRequest';
 import PostValidationSchema from '../http/validation/post';
-import {PaginateOptions, PaginationListDTO} from "../../../domain/Entities/infra";
+import { PaginateOptions, PaginationListDTO } from '../../../domain/Entities/infra';
 export class PostController extends BaseController {
   private postRepository = new PostRepository();
   private authRepository = new AuthRepository();
@@ -38,7 +38,7 @@ export class PostController extends BaseController {
       const options: PaginateOptions = {
         offset: +req.query.offset,
         limit: +req.query.limit
-      }
+      };
       const paginatedPosts = await this.postRepository.getAllPostsWithPagination(options);
       this.ok(res, paginatedPosts);
     } catch (err) {

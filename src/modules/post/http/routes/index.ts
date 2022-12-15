@@ -13,6 +13,4 @@ postRoutes.route('/list').get((req, res) => ctrl.getAllPosts(req, res));
 // Get post by id route
 postRoutes.route('/:id').get((req, res) => ctrl.getPostById(req, res));
 
-
-
 export default postRoutes;

@@ -2,7 +2,12 @@ import * as fs from 'fs';
 import { ICreatePostTask, Post } from '../../../domain/Entities/post';
 import { UserService } from '../../user/service/UserService';
 import * as console from 'console';
+import { PaginateOptions } from '../../../domain/Entities/infra';
 
+type PostModelData = {
+  totalPostsAmount: number;
+  posts: Post[];
+};
 export class PostService {
   private postJsonDatabasePath: string = process.cwd() + '/src/JSONDatabase/posts.json';
 
@@ -14,6 +19,24 @@ export class PostService {
       };
       return this.saveNewPostToJSONDatabase(newPost);
     } catch (err) {}
+  }
+
+  getAllPosts(options: PaginateOptions): PostModelData {
+    const allPostsAsJSON = this.readAllPostsFromPostsJson();
+    let posts: Post[] = [];
+    const postsData: Post[] = JSON.parse(allPostsAsJSON.toString());
+    const totalPostsAmount: number = postsData.length;
+    if (options.limit) {
+      for (let i = options.offset; i < options.offset + options.limit; i++) {
+        posts.push(postsData[i]);
+      }
+    } else {
+      posts = postsData;
+    }
+    return {
+      posts,
+      totalPostsAmount
+    };
   }
 
   getPostById(postId: number): Post {

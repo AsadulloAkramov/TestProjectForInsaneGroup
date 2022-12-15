@@ -3,6 +3,11 @@ import * as fs from 'fs';
 import { PaginateOptions } from '../../../domain/Entities/infra';
 import * as console from 'console';
 
+export type UserModelData = {
+  totalUsersAmount: number;
+  users: User[];
+};
+
 export class UserService {
   private userJsonDatabasePath: string = process.cwd() + '/src/JSONDatabase/users.json';
 
@@ -57,11 +62,11 @@ export class UserService {
       throw err;
     }
   }
-  async getAllUsers(options: PaginateOptions) {
+  async getAllUsers(options: PaginateOptions): Promise<UserModelData> {
     const usersAsJSON = this.readAllUserFromUsersJSON();
     let users: User[] = [];
     const userData: User[] = JSON.parse(usersAsJSON.toString());
-    const totalAmount: number = userData.length;
+    const totalUsersAmount: number = userData.length;
     if (options.limit) {
       for (let i = options.offset; i < options.offset + options.limit; i++) {
         users.push(userData[i]);
@@ -72,7 +77,7 @@ export class UserService {
 
     return {
       users,
-      totalAmount
+      totalUsersAmount
     };
   }
   readAllUserFromUsersJSON() {
