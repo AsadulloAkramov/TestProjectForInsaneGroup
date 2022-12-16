@@ -11,7 +11,7 @@
   "author": "Asadullo Akramov",
   "license": "ISC",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc",
     "start:dev": "nodemon",
     "start": "node ./dist/src/index.js",
     "test": "jest",
@@ -20,7 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "format": "prettier --write \"*.{js,ts}\" \"{src,test}/**/*.{js,ts}\" "
+    "format": "prettier --write \"*.{js,ts}\" \"{src,test}/**/*.{js,ts}\" ",
+    "run:seed": "ts-node ./src/shared/seeders/index.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.1",
