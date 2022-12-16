@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { ApplicationConfig } from '../config';
 import { ApplicationConfigurationOptions } from '../domain/ApplicationConfigs';
-import routes from '../core/http/baseRoute';
+import routes from '../core/http/api/baseRoute';
 
 export class App {
   private static instance: App;

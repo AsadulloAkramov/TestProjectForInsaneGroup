@@ -33,6 +33,7 @@ export class UserService {
   async findUserByEmail(email: string): Promise<User | null> {
     try {
       const allUserAsJSON = this.readAllUserFromUsersJSON();
+      if(allUserAsJSON.length == 0) return null;
       // convert json data into array of users
       const users: User[] = await JSON.parse(allUserAsJSON.toString());
       return users.find((user) => user.email == email);

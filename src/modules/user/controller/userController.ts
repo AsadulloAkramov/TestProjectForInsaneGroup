@@ -16,8 +16,11 @@ export class UserController extends BaseController {
   async create(req: Request, res: Response) {
     try {
       const body: CreateUserDTO = req.body;
+      const user = await this.userRepository.getUserByEmail(body.email);
+      if (user) {
+        this.alreadyExist(res, `User with associated ${body.email} already exist`);
+      }
       const newUser = await this.userRepository.createUser(body);
-
       this.ok(res, newUser);
     } catch (error) {
       return this.fail(res, error.message);

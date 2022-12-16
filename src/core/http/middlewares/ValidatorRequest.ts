@@ -29,18 +29,9 @@ export function Validate(schema: Schema) {
       });
       const valid = error == null;
       if (!valid) {
-        const err: any = error;
-        const message = err.details.map((detail: any) => {
-          return {
-            message: detail.message,
-            type: detail.type,
-            path: detail.path[0],
-            property: detail.context.key
-          };
-        });
         return res.status(422).json({
           cause: 'Validation error',
-          message
+          message: error.details[0].message
         });
       }
 

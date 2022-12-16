@@ -28,6 +28,10 @@ export abstract class BaseController {
     return BaseController.jsonResponse(res, 404, message ? message : 'Not found');
   }
 
+  protected alreadyExist(res: Response, message?: string): Response {
+    return BaseController.jsonResponse(res, 409, message ? message : 'Already exist');
+  }
+
   protected fail(res: Response, message?: string) {
     return BaseController.jsonResponse(res, 500, message ? message : 'Internal Server Error');
   }

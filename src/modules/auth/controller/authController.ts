@@ -9,6 +9,7 @@ import { Validate } from '../../../core/http/middlewares/ValidatorRequest';
 
 export class AuthController extends BaseController {
   private authRepository = new AuthRepository();
+
   @Validate(AuthSchema.login)
   async login(req: Request, res: Response) {
     try {

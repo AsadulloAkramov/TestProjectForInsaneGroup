@@ -1,6 +1,114 @@
 [
-  {"id":1,"title":"Node.js","content":"JavaScript zo'rda baribir","author":{"id":1}},
-  {"id":2,"title":"Introduction","content":"Men Asadulloman","author":{"id":1}},
-  {"id":3,"title":"Introduction","content":"Men Nurulloman","author":{"id":2}},
-  {"id":4,"title":"Programming","content":"I love programming","author":{"id":2}}
+  {
+    "id": 1,
+    "title": "Programming",
+    "content": "I love programming",
+    "author": {
+      "id": 3
+    }
+  },
+  {
+    "id": 2,
+    "title": "Programming",
+    "content": "I also love programming especially TypeScript",
+    "author": {
+      "id": 9
+    }
+  },
+  {
+    "id": 3,
+    "title": "Programming",
+    "content": "What is programming really I don't know",
+    "author": {
+      "id": 6
+    }
+  },
+  {
+    "id": 4,
+    "title": "Programming",
+    "content": "Really you don't know programming heey Messi trash You are silly",
+    "author": {
+      "id": 5
+    }
+  },
+  {
+    "id": 5,
+    "title": "Programming",
+    "content": "Yeeah I know I am trash but you Cristiano Ronaldo is the best of the world of all time",
+    "author": {
+      "id": 6
+    }
+  },
+  {
+    "id": 6,
+    "title": "Kitoblar",
+    "content": "Kelinglar mavzuni kitoblarga o'zgartiramiz",
+    "author": {
+      "id": 6
+    }
+  },
+  {
+    "id": 7,
+    "title": "Kitoblar",
+    "content": "Ha kitoblar zo'r mulohaza uchun",
+    "author": {
+      "id": 10
+    }
+  },
+  {
+    "id": 8,
+    "title": "Kitoblar",
+    "content": "Ha kitoblar yaxshi mavzu ammo keling futbol haqida gaplashaylik",
+    "author": {
+      "id": 8
+    }
+  },
+  {
+    "id": 9,
+    "title": "Futbol",
+    "content": "Ha futbol deyilsa man faqat Cristiano Ronaldoni tan olaman u o'z davrining eng zo'ri eeeeng zo'ri Messi esa musor",
+    "author": {
+      "id": 2
+    }
+  },
+  {
+    "id": 10,
+    "title": "Futbol",
+    "content": "Ha men uchun ham Ronaldu eng zo'ri",
+    "author": {
+      "id": 3
+    }
+  },
+  {
+    "id": 11,
+    "title": "Futbol",
+    "content": "Ronaldu >>>> Messi",
+    "author": {
+      "id": 4
+    }
+  },
+  {
+    "id": 12,
+    "title": "Futbol",
+    "content": "Men uchun ham Ronaldu thee best Ronaldu >>>> Messi",
+    "author": {
+      "id": 1
+    }
+  },
+  {
+    "id": 13,
+    "title": "Mavzu almashtirish",
+    "content": "Iltimos mavzuni almashtiraylik",
+    "author": {
+      "id": 8
+    }
+  },
+  {
+    "id": 14,
+    "title": "Mavzu almashtirish",
+    "content": "Men ham qo'shilaman",
+    "author": {
+      "id": 10
+    }
+  }
 ]

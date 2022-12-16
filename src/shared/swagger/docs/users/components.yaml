@@ -1,0 +1,22 @@
+components:
+  schemas:
+    RegisterUserModel:
+      type: 'object'
+      properties:
+        email:
+          type: 'string'
+          required: true
+          description: 'user email'
+        password:
+          type: 'string'
+          required: true
+          description: 'user password'
+    LoginModel:
+      type: 'object'
+      properties:
+        email:
+          type: 'string'
+          required: true
+        password:
+          type: 'string'
+          required: true

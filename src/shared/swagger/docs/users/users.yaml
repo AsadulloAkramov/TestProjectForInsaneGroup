@@ -1,0 +1,182 @@
+/user/sign-up:
+  post:
+    security:
+      - Bearer: []
+    tags:
+      - User
+    summary: Register User
+    description: Return new registered data
+    requestBody:
+      description: Register
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegisterUserModel'
+          example:
+            email: 'johndoe@gmail.com'
+            password: 'john-doe123'
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                email:
+                  type: string
+                hashedPassword:
+                  type: string
+                salt:
+                  type: string
+                posts:
+                  type: array
+                  items:
+                    type: object
+      409:
+        description: Conflict
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - The email ${email} or username ${username} associated for this account already exists
+      422:
+        description: Unprocessable Entity
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - \"password\" missing required peer \"confirmPassword\"
+/user/list:
+  get:
+    security:
+      - Bearer: []
+    tags:
+      - Get all users with pagination
+    summary: Users list
+    parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: The number of items to skip before starting to collect the users result
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: The number of items to return
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                total:
+                  type: number
+                page:
+                  type: number
+                nextPage:
+                  type: number
+                prevPage:
+                  type: number
+                hasNextPage:
+                  type: boolean
+                hasPrevPage:
+                  type: boolean
+                limit:
+                  type: number
+                offset:
+                  type: number
+                totalPages:
+                  type: number
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      email:
+                        type: string
+                      hashedPassword:
+                        type: string
+                      salt:
+                        type: string
+                      posts:
+                        type: array
+                        items: object
+/auth/login:
+  post:
+    tags:
+      - Auth
+    summary: Login
+    requestBody:
+      description: Login
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginModel'
+          example:
+            email: 'johndoe@gmail.com'
+            password: 'john-doe123'
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/apiResponse'
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - OK
+                data:
+                  type: object
+                  properties:
+                    user:
+                      $ref: '#/components/schemas/CleanUserModel'
+                    tokens:
+                      $ref: '#/components/schemas/TokenModel'
+      404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - User Not found
+      400:
+        description: Invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - Incorrect login or password
+
+
+
+

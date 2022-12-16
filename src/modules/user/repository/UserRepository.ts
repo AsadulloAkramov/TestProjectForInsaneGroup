@@ -55,4 +55,12 @@ export class UserRepository extends BaseRepository {
       throw err;
     }
   }
+
+  async getUserByEmail(email: string) {
+    try {
+      return await this.userService.findUserByEmail(email);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
