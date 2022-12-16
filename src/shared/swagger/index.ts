@@ -8,10 +8,10 @@ const swaggerPort: number = +process.env.APP_PORT | 3000;
 
 const swaggerDocs = swaggerJsDoc({
   swaggerDefinition: {
-    openapi: '3.0.0',
+    openapi: '3.0.3',
     servers: [
       {
-        url: 'http://localhost:{3000}',
+        url: `http://localhost:${swaggerPort}`,
         description: 'INSANE GROUP technical task local server',
         variables: {
           port: {

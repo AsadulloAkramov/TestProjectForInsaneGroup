@@ -1,0 +1,27 @@
+components:
+  schemas:
+    CreatePostModel:
+      type: 'object'
+      properties:
+        title:
+          type: 'string'
+          required: true
+          description: 'Post title'
+        content:
+          type: 'string'
+          required: true
+          description: 'Post body'
+    PostModel:
+      type: 'object'
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        author:
+          type: object
+          properties:
+            id:
+              type: integer

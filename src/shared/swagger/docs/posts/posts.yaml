@@ -1,28 +1,22 @@
-/user/sign-up:
+/post/create:
   post:
     security:
       - Bearer: []
     tags:
-      - User
-    summary: Register User
-    description: Return new registered data
+      - Post
+    summary: Create new post
+    description: Return new post data
     requestBody:
-      description: Register
+      description: Post
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RegisterUserModel'
+            $ref: '#/components/schemas/CreatePostModel'
           example:
-            email: 'johndoe@gmail.com'
-            password: 'john-doe123'
+            title: 'Programming'
+            content: 'I love programming, especially TypeScript and JavaScript'
     responses:
-      parameters:
-        - in: header
-          name: Access-Control-Allow-Origin
-          schema:
-            type: string
-            default: '*'
       200:
         description: OK
         content:
@@ -32,27 +26,15 @@
               properties:
                 id:
                   type: integer
-                email:
+                title:
                   type: string
-                hashedPassword:
+                content:
                   type: string
-                salt:
-                  type: string
-                posts:
-                  type: array
-                  items:
-                    type: object
-      409:
-        description: Conflict
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  enum:
-                    - The email ${email} or username ${username} associated for this account already exists
+                author:
+                  type: object
+                  properties:
+                    id:
+                      type: string
       422:
         description: Unprocessable Entity
         content:
@@ -63,25 +45,25 @@
                 message:
                   type: string
                   enum:
-                    - \"password\" missing required peer \"confirmPassword\"
-/user/list:
+                    - "Validation failed"
+/post/list:
   get:
     security:
       - Bearer: []
     tags:
-      - User
-    summary: Get all users with pagination
+      - Post
+    summary: Get posts with pagination
     parameters:
       - in: query
         name: offset
         schema:
           type: integer
-        description: The number of items to skip before starting to collect the users result
+        description: The number of items to skip before starting to collect the posts result
       - in: query
         name: limit
         schema:
           type: integer
-        description: The number of items to return
+        description: The number of posts to return
     responses:
       200:
         description: OK
@@ -115,30 +97,27 @@
                     properties:
                       id:
                         type: integer
-                      email:
+                      title:
                         type: string
-                      hashedPassword:
+                      content:
                         type: string
-                      salt:
-                        type: string
-                      posts:
-                        type: array
-                        items: object
-/auth/login:
+                      author:
+                        type: object
+                        properties:
+                          id:
+                            type: 'number'
+/post/{id}:
   post:
     tags:
-      - Auth
-    summary: Login
-    requestBody:
-      description: Login
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoginModel'
-          example:
-            email: 'johndoe@gmail.com'
-            password: 'john-doe123'
+      - Post
+    summary: Get post by id
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          required: true
+          description: Post id to get it
     responses:
       200:
         description: OK
@@ -146,20 +125,7 @@
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/apiResponse'
-              type: object
-              properties:
-                message:
-                  type: string
-                  enum:
-                    - OK
-                data:
-                  type: object
-                  properties:
-                    user:
-                      $ref: '#/components/schemas/CleanUserModel'
-                    tokens:
-                      $ref: '#/components/schemas/TokenModel'
+                - $ref: '#/components/schemas/PostModel'
       404:
         description: Not found
         content:
@@ -170,9 +136,9 @@
                 message:
                   type: string
                   enum:
-                    - User Not found
-      400:
-        description: Invalid credentials
+                    - Post Not found
+      401:
+        description: Unauthorized
         content:
           application/json:
             schema:
@@ -181,7 +147,7 @@
                 message:
                   type: string
                   enum:
-                    - Incorrect login or password
+                    - Unauthorized, please create your account to leave a post
 
 
 
