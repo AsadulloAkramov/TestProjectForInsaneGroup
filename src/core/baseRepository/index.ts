@@ -4,6 +4,7 @@ import { PaginateOptions, PaginationListDTO } from '../../domain/Entities/infra'
 import { PostService } from '../../modules/post/service/PostService';
 import { User } from '../../domain/Entities/user';
 import { Post } from '../../domain/Entities/post';
+import * as process from "process";
 
 type ModelData = {
   totalAmount: number;
@@ -30,8 +31,8 @@ export abstract class BaseRepository {
   }
 
   protected async paginate<T>(model: APPLICATION_MODELS, options: PaginateOptions): Promise<PaginationListDTO<T>> {
-    let offset: number = 0;
-    let limit: number = 5;
+    let offset: number = +process.env.DEFAULT_OFFSET | 0;
+    let limit: number = +process.env.DEFAULT_LIMIT | 5;
 
     if (options) {
       if (options.offset) {
