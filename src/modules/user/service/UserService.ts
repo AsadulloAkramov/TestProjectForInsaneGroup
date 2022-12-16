@@ -68,8 +68,10 @@ export class UserService {
     let users: User[] = [];
     const userData: User[] = JSON.parse(usersAsJSON.toString());
     const totalUsersAmount: number = userData.length;
+    let lastIndex = options.offset + options.limit;
+    lastIndex = totalUsersAmount > lastIndex ? lastIndex: totalUsersAmount;
     if (options.limit) {
-      for (let i = options.offset; i < options.offset + options.limit; i++) {
+      for (let i = options.offset; i < lastIndex; i++) {
         users.push(userData[i]);
       }
     } else {

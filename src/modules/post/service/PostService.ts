@@ -26,8 +26,10 @@ export class PostService {
     let posts: Post[] = [];
     const postsData: Post[] = JSON.parse(allPostsAsJSON.toString());
     const totalPostsAmount: number = postsData.length;
+    let lastIndex: number = options.offset + options.limit;
+    lastIndex = totalPostsAmount > lastIndex ? lastIndex: totalPostsAmount;
     if (options.limit) {
-      for (let i = options.offset; i < options.offset + options.limit; i++) {
+      for (let i = options.offset; i < lastIndex; i++) {
         posts.push(postsData[i]);
       }
     } else {

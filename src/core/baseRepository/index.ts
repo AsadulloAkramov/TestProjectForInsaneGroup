@@ -48,14 +48,14 @@ export abstract class BaseRepository {
     let items: any[] = allModelData.items;
     const count = allModelData.totalAmount;
 
-    const page = Math.ceil(offset / limit);
-    const totalPages = Math.ceil(count / limit);
+    const totalPages = Math.ceil(count / limit) + 1;
+    const page = Math.ceil(offset / limit) + 1;
 
     const data: PaginationListDTO<T> = {
       total: count,
       page,
-      nextPage: offset,
-      prevPage: offset,
+      nextPage: totalPages,
+      prevPage: page,
       hasNextPage: false,
       hasPrevPage: false,
       limit,
@@ -64,13 +64,13 @@ export abstract class BaseRepository {
       items
     };
 
-    if (data.page - 1 >= 0) {
+    if (data.page - 1 > 0) {
       data.prevPage = data.page - 1;
       data.hasPrevPage = true;
     }
 
-    if (data.nextPage + 1 <= totalPages) {
-      data.nextPage = data.nextPage + 1;
+    if (data.page + 1 <= totalPages) {
+      data.nextPage = data.page + 1;
       data.hasNextPage = true;
     }
 
