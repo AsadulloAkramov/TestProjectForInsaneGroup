@@ -68,3 +68,7 @@ uz --> Bu kichik loyihada userlarni ro'yxatga olish ularni autentifikatsiya qili
 ru --> В этом подпроекте можно регистрировать пользователей, аутентифицировать их, создавать сообщения и извлекать пользователей и сообщения на основе нумерации страниц. Для каждой feature реализована специальная валидация, для документирования создан SWAGGER
 
 en --> In this sub-project, it is possible to register users, authenticate them, create posts, and retrieve users and posts based on pagination. For each feature, special validation is implemented, SWAGGER is created for documentation
+
+<p align="center">
+    <img src="./static/docs/swagger-info.jpg" alt="Swagger image">
+</p>
